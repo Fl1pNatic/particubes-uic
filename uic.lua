@@ -4,10 +4,21 @@ Config = {
 	ConstantAcceleration = {0, 0, 0}
 }
 
+-- Maybe in future
+makeMap = function()
+	
+	
+end
+
 
 Client.OnStart = function()
+	makeMap()
+
 	-- Variables
 	clicks = 0
+
+	clickPrice = 100
+	clickers = 0
 
 	-- Some options
 	UI.Crosshair = false
@@ -32,11 +43,17 @@ Client.OnStart = function()
 	clickCount = Label("", Anchor.HCenter, Anchor.VCenter)
 
 	name = Label("User: " .. Player.Username, Anchor.HCenter, Anchor.HCenter)
+
+	-- You can't tell me what to do with my minigame
+	if Player.Username == "fl1pnatic" then
+		print("Hello, Fl1pNatic")
+	end
+
 end
 
 Client.Tick = function(dt)
 
-
+	-- Click button
 	clickButton.OnPress = function()
 		click()
 	end
@@ -44,9 +61,17 @@ Client.Tick = function(dt)
 	-- Clicking function
 	click = function()
 		clicks = clicks + 1
-		clickCount.Text = tostring(clicks)
 	end
 
+	-- Actions
+	local timers = Timer(1.0, true, function()
+		--clicks = clicks + clickers/10
+	end)
+
+
+	local loop = Timer(0.1, true, function()
+		clickCount.Text = tostring(clicks)
+	end)
 end
 
 
